@@ -42,7 +42,8 @@ class EventAPI:
                       event_details=event_details,
                       date=date,
                       start_time=start_time,
-                      end_time=end_time)
+                      end_time=end_time,
+                      password=password)
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
