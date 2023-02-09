@@ -33,6 +33,7 @@ class EventAPI:
                 return {'message': f'Date is missing, formatted incorrectly, or within an invalid time range.'}, 210
             start_time = body.get('start_time')
             end_time = body.get('end_time')
+            password = body.get('password')
 
             ''' #1: Key code block, setup USER OBJECT '''
             eo = Event(name=name, 

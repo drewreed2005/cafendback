@@ -28,9 +28,10 @@ class Event(db.Model):
     _date = db.Column(db.String(255), unique=False, nullable=False)
     _start_time = db.Column(db.String(255), unique=False, nullable=False)
     _end_time = db.Column(db.String(255), unique=False, nullable=False)
+    _password = db.Column(db.String(255), unique=False, nullable=False)
 
     # constructor of a User object, initializes the instance variables within object (self) 
-    def __init__(self, name, email, event_name, event_details, date, start_time, end_time):
+    def __init__(self, name, email, event_name, event_details, date, start_time, end_time, password):
         self._name = name
         self._email = email
         self._event_name = event_name
@@ -38,6 +39,7 @@ class Event(db.Model):
         self._date = date
         self._start_time = start_time
         self._end_time = end_time
+        self._password = password
     
     #here's the name getter
     @property
@@ -108,6 +110,16 @@ class Event(db.Model):
     @end_time.setter
     def end_time(self, end_time):
         self._end_time = end_time
+
+    #here's the password getter
+    @property
+    def password(self):
+        return self._password
+    
+    #here's the password setter
+    @end_time.setter
+    def password(self, password):
+        self._password = password
     
     # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
@@ -137,12 +149,13 @@ class Event(db.Model):
             "event_details": self.event_details,
             "date": self.date,
             "start_time": self.start_time,
-            "end_time": self.end_time
+            "end_time": self.end_time,
+            "password": self.password
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, name="", email="", event_name="", event_details="", date="", start_time="", end_time=""):
+    def update(self, name="", email="", event_name="", event_details="", date="", start_time="", end_time="", password=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
@@ -158,6 +171,8 @@ class Event(db.Model):
             self.start_time = start_time
         if len(end_time) > 0:
             self.end_time = end_time
+        if len(password) > 0:
+            self.password = password
         db.session.commit()
         return self
 
@@ -176,23 +191,23 @@ class Event(db.Model):
 def initEvents():
     """Create database and tables"""
     db.create_all()
-    """Tester data for table"""
+    #Tester data for table
     e1 = Event(name="Thomas Edison", email="tedison@lightbulb.edu",
         event_name="The Edison Troupe Meet",
         event_details="We 10 selected geniuses will meet in the events room for a convergence.",
-        date="02/23/2023", start_time="13:00", end_time="14:00")
+        date="02/23/2023", start_time="13:00", end_time="14:00", password="tedisonrules20")
     e2 = Event(name="John Mortensen", email="jmortensen@powayusd.com",
         event_name="Extra Credit Code Meetup",
         event_details="Come to work on ideation and any confusion with the Full Stack CPT project. No phones.",
-        date="02/25/2023", start_time="10:00", end_time="12:00")
+        date="02/25/2023", start_time="10:00", end_time="12:00", password="codec0decod3bro")
     e3 = Event(name="Karl Giant", email="giantrichguy@wallstreet.org",
         event_name="Karl and Cats",
         event_details="Karl would like to see cats with friends (if he can fit in the building).",
-        date="02/26/2023", start_time="16:00", end_time="17:00")
+        date="02/26/2023", start_time="16:00", end_time="17:00", password="i_am-the-f4th3r")
     
     events = [e1, e2, e3]
 
-    """Builds sample events data"""
+    #Builds sample events data
     for event in events:
         try:
             event.create()
