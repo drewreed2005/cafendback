@@ -192,6 +192,7 @@ def initEvents():
     """Create database and tables"""
     db.create_all()
     #Tester data for table
+    ""
     e1 = Event(name="Thomas Edison", email="tedison@lightbulb.edu",
         event_name="The Edison Troupe Meet",
         event_details="We 10 selected geniuses will meet in the events room for a convergence.",
@@ -214,4 +215,5 @@ def initEvents():
         except IntegrityError:
             '''fails with bad or duplicate data'''
             db.session.remove()
-            print(f"Records exist, duplicate email, or error: {event.event_name}")
+            print(f"Records exist, duplicate data, or error: {event.event_name}")
+    ""
