@@ -117,7 +117,7 @@ class Event(db.Model):
         return self._password
     
     #here's the password setter
-    @end_time.setter
+    @password.setter
     def password(self, password):
         self._password = password
     
