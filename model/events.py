@@ -189,31 +189,32 @@ class Event(db.Model):
 
 # Builds working data for testing
 def initEvents():
-    """Create database and tables"""
-    db.create_all()
-    #Tester data for table
-    ""
-    e1 = Event(name="Thomas Edison", email="tedison@lightbulb.edu",
-        event_name="The Edison Troupe Meet",
-        event_details="We 10 selected geniuses will meet in the events room for a convergence.",
-        date="02/23/2023", start_time="13:00", end_time="14:00", password="tedisonrules20")
-    e2 = Event(name="John Mortensen", email="jmortensen@powayusd.com",
-        event_name="Extra Credit Code Meetup",
-        event_details="Come to work on ideation and any confusion with the Full Stack CPT project. No phones.",
-        date="02/25/2023", start_time="10:00", end_time="12:00", password="codec0decod3bro")
-    e3 = Event(name="Karl Giant", email="giantrichguy@wallstreet.org",
-        event_name="Karl and Cats",
-        event_details="Karl would like to see cats with friends (if he can fit in the building).",
-        date="02/26/2023", start_time="16:00", end_time="17:00", password="i_am-the-f4th3r")
-    
-    events = [e1, e2, e3]
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
+        """Tester data for table
+        e1 = Event(name="Thomas Edison", email="tedison@lightbulb.edu",
+            event_name="The Edison Troupe Meet",
+            event_details="We 10 selected geniuses will meet in the events room for a convergence.",
+            date="02/23/2023", start_time="13:00", end_time="14:00", password="tedisonrules20")
+        e2 = Event(name="John Mortensen", email="jmortensen@powayusd.com",
+            event_name="Extra Credit Code Meetup",
+            event_details="Come to work on ideation and any confusion with the Full Stack CPT project. No phones.",
+            date="02/25/2023", start_time="10:00", end_time="12:00", password="codec0decod3bro")
+        e3 = Event(name="Karl Giant", email="giantrichguy@wallstreet.org",
+            event_name="Karl and Cats",
+            event_details="Karl would like to see cats with friends (if he can fit in the building).",
+            date="02/26/2023", start_time="16:00", end_time="17:00", password="i_am-the-f4th3r")
+        
+        events = [e1, e2, e3]
 
-    #Builds sample events data
-    for event in events:
-        try:
-            event.create()
-        except IntegrityError:
-            '''fails with bad or duplicate data'''
-            db.session.remove()
-            print(f"Records exist, duplicate data, or error: {event.event_name}")
-    ""
+        #Builds sample events data
+        for event in events:
+            try:
+                event.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate data, or error: {event.event_name}")
+        """
