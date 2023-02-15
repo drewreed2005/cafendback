@@ -22,9 +22,9 @@ class UserAPI:
             if name is None or len(name) < 2:
                 return {'message': f'Name is missing, or is less than 2 characters'}, 210
             # validate uid
-            points = body.get('points')
-            if points is None or len(points) < 1:
-                return {'message': f'Points is missing, or is less than 2 characters'}, 210
+            level = body.get('level')
+            if level is None or len(level) < 1:
+                return {'message': f'level is missing, or is less than 2 characters'}, 210
             time = body.get('time')
             if time is None or len(time) < 0:
                 return {'message': f'Time is missing, or is less than 0 characters'}, 210
@@ -34,7 +34,7 @@ class UserAPI:
 
             ''' #1: Key code block, setup USER OBJECT '''
             uo = User(name=name, 
-                      points=points,
+                      level=level,
                       time=time,
                       pin=pin)
             

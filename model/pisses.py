@@ -25,15 +25,15 @@ class User(db.Model):
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=True, nullable=False)
-    _points = db.Column(db.String(255), unique=False, nullable=False)
+    _level = db.Column(db.String(255), unique=False, nullable=False)
     _time = db.Column(db.String(255), unique=False, nullable=False)
     _pin = db.Column(db.String(255), unique=True, nullable=False)
 
 
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, name, points, time, pin):
+    def __init__(self, name, level, time, pin):
         self._name = name    # variables with self prefix become part of the object, 
-        self._points = points
+        self._level = level
         self._time = time
         self._pin = pin
 
@@ -47,15 +47,15 @@ class User(db.Model):
     def name(self, name):
         self._name = name
     
-    # a getter method, extracts points from object
+    # a getter method, extracts level from object
     @property
-    def points(self):
-        return self._points
+    def level(self):
+        return self._level
     
     # a setter function, allows name to be updated after initial object creation
-    @points.setter
-    def points(self, points):
-        self._points = points
+    @level.setter
+    def level(self, level):
+        self._level = level
     
     @property
     def time(self):
@@ -96,19 +96,19 @@ class User(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "points": self.points,
+            "level": self.level,
             "time": self.time,
             "pin": self.pin,
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, name="", points="", time="", pin=""):
+    def update(self, name="", level="", time="", pin=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
-        if len(points) > 0:
-            self.points = points
+        if len(level) > 0:
+            self.level = level
         if len(time) > 0:
             self.time = time
         if len(pin) > 0:
@@ -132,11 +132,11 @@ def initUsers():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = User(name='Thomas Edison', points='100', time='00:03:01', pin='aspoi')
-    u2 = User(name='Nicholas Tesla', points='200', time='00:10:13', pin='brian')
-    u3 = User(name='Alexander Graham Bell', points='123', time='00:07:20', pin='23451')
-    u4 = User(name='Eli Whitney', points='432', time='00:06:09', pin='who')
-    u5 = User(name='John Mortensen', points='340', time='10:16:21', pin='apcs')
+    u1 = User(name='Thomas Edison', level='100', time='00:03:01', pin='aspoi')
+    u2 = User(name='Nicholas Tesla', level='200', time='00:10:13', pin='brian')
+    u3 = User(name='Alexander Graham Bell', level='123', time='00:07:20', pin='23451')
+    u4 = User(name='Eli Whitney', level='432', time='00:06:09', pin='who')
+    u5 = User(name='John Mortensen', level='340', time='10:16:21', pin='apcs')
 
     users = [u1, u2, u3, u4, u5]
 
@@ -147,5 +147,5 @@ def initUsers():
         except IntegrityError:
             '''fails with bad or duplicate data'''
             db.session.remove()
-            print(f"Records exist, duplicate points, or error: {user.pin}")
+            print(f"Records exist, duplicate level, or error: {user.pin}")
             
