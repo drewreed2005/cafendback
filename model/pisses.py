@@ -128,7 +128,7 @@ class User(db.Model):
 
 
 # Builds working data for testing
-def initUsers():
+def initPisses():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""

@@ -6,8 +6,8 @@ from flask import render_template  # import render_template from "public" flask 
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
 from model.jokes import initJokes
-from model.users import initUsers
 from model.events import initEvents
+from model.pisses import initPisses
 
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
@@ -41,8 +41,8 @@ def stub():
 @app.before_first_request
 def activate_job():
     initJokes()
-    initUsers()
     initEvents()
+    initPisses()
 
 # this runs the application on the development server
 if __name__ == "__main__":
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     from flask_cors import CORS
     cors = CORS(app)
     
-    app.run(debug=True, host="0.0.0.0", port="8086")
+    app.run(debug=True, host="0.0.0.0", port="8239")
