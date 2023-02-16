@@ -1,11 +1,15 @@
-from flask import Blueprint, request, jsonify
+from flask import Flask, Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 from datetime import *
+from flask_cors import CORS
 
 from model.events import Event
 
 event_api = Blueprint('event_api', __name__,
                    url_prefix='/api/events')
+
+app = Flask(__name__)
+cors = CORS(app, resources={r"/events/*": {"origins": "*"}})
 
 # API docs https://flask-restful.readthedocs.io/en/latest/api.html
 api = Api(event_api)
