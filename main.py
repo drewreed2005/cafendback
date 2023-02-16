@@ -8,12 +8,14 @@ from __init__ import app  # Definitions initialization
 from model.jokes import initJokes
 from model.events import initEvents
 from model.pisses import initPisses
+from model.wordles import initWordles
 
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
 from api.piss import piss_api # Blueprint import api definition
 from api.event import event_api
+from api.wordle import wordle_api
 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
@@ -22,7 +24,8 @@ from projects.projects import app_projects # Blueprint directory import projects
 app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(covid_api) # register api routes
 app.register_blueprint(piss_api) # register api routes
-app.register_blueprint(event_api) # register api routes
+app.register_blueprint(event_api)
+app.register_blueprint(wordle_api) # register api routes
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
@@ -43,6 +46,7 @@ def activate_job():
     initJokes()
     initEvents()
     initPisses()
+    initWordles()
 
 # this runs the application on the development server
 if __name__ == "__main__":
