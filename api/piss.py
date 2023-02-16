@@ -2,15 +2,15 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource # used for REST API building
 from datetime import datetime
 
-from model.pisses import User
+from model.pisses import Piss
 
-user_api = Blueprint('user_api', __name__,
-                   url_prefix='/api/users')
+piss_api = Blueprint('piss_api', __name__,
+                   url_prefix='/api/pisses')
 
 # API docs https://flask-restful.readthedocs.io/en/latest/api.html
-api = Api(user_api)
+api = Api(piss_api)
 
-class UserAPI:        
+class PissAPI:        
     class _Create(Resource):
         def post(self):
             ''' Read data for json body '''
@@ -33,7 +33,7 @@ class UserAPI:
                 return {'message': f'Pin is missing, or is less than 2 characters'}, 210
 
             ''' #1: Key code block, setup USER OBJECT '''
-            uo = User(name=name, 
+            uo = Piss(name=name, 
                       level=level,
                       time=time,
                       pin=pin)
@@ -46,17 +46,17 @@ class UserAPI:
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
-            user = uo.create()
+            piss = uo.create()
             # success returns json of user
-            if user:
-                return jsonify(user.read())
+            if piss:
+                return jsonify(piss.read())
             # failure returns error
             return {'message': f'Processed {name}, either a format error or Pin {pin} is duplicate'}, 210
 
     class _Read(Resource):
         def get(self):
-            users = User.query.all()    # read/extract all users from database
-            json_ready = [user.read() for user in users]  # prepare output in json
+            pisses = Piss.query.all()    # read/extract all users from database
+            json_ready = [piss.read() for piss in pisses]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
     # building RESTapi endpoint

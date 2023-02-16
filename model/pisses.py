@@ -19,8 +19,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # -- a.) db.Model is like an inner layer of the onion in ORM
 # -- b.) User represents data we want to store, something that is built on db.Model
 # -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
-class User(db.Model):
-    __tablename__ = 'users'  # table name is plural, class name is singular
+class Piss(db.Model):
+    __tablename__ = 'pisses'  # table name is plural, class name is singular
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
@@ -132,20 +132,20 @@ def initPisses():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = User(name='Thomas Edison', level='100', time='00:03:01', pin='aspoi')
-    u2 = User(name='Nicholas Tesla', level='200', time='00:10:13', pin='brian')
-    u3 = User(name='Alexander Graham Bell', level='123', time='00:07:20', pin='23451')
-    u4 = User(name='Eli Whitney', level='432', time='00:06:09', pin='who')
-    u5 = User(name='John Mortensen', level='340', time='10:16:21', pin='apcs')
+    u1 = Piss(name='Thomas Edison', level='100', time='00:03:01', pin='aspoi')
+    u2 = Piss(name='Nicholas Tesla', level='200', time='00:10:13', pin='brian')
+    u3 = Piss(name='Alexander Graham Bell', level='123', time='00:07:20', pin='23451')
+    u4 = Piss(name='Eli Whitney', level='432', time='00:06:09', pin='who')
+    u5 = Piss(name='John Mortensen', level='340', time='10:16:21', pin='apcs')
 
-    users = [u1, u2, u3, u4, u5]
+    pisses = [u1, u2, u3, u4, u5]
 
     """Builds sample user/note(s) data"""
-    for user in users:
+    for piss in pisses:
         try:
-            user.create()
+            piss.create()
         except IntegrityError:
             '''fails with bad or duplicate data'''
             db.session.remove()
-            print(f"Records exist, duplicate level, or error: {user.pin}")
+            print(f"Records exist, duplicate level, or error: {piss.pin}")
             
