@@ -191,7 +191,6 @@ class Event(db.Model):
 def initEvents():
     with app.app_context():
         """Create database and tables"""
-        db.init_app(app)
         db.create_all()
         """Tester data for table
         e1 = Event(name="Thomas Edison", email="tedison@lightbulb.edu",
