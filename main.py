@@ -12,7 +12,7 @@ from model.pisses import initPisses
 # setup APIs
 from api.covid import covid_api # Blueprint import api definition
 from api.joke import joke_api # Blueprint import api definition
-from api.user import user_api # Blueprint import api definition
+from api.piss import user_api # Blueprint import api definition
 from api.event import event_api
 
 # setup App pages
