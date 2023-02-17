@@ -112,7 +112,6 @@ class Wordle(db.Model):
 
 # Builds working data for testing
 def initWordles():
-    with app.app_context():
         """Create database and tables"""
         db.create_all()
         """Tester data for table"""
