@@ -115,12 +115,12 @@ def initWordles():
     with app.app_context():
         """Create database and tables"""
         db.create_all()
-        """Tester data for table
-        e1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
-        e2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
-        e3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
+        """Tester data for table"""
+        u1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
+        u2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
+        u3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
         
-        wordles = [e1, e2, e3]
+        wordles = [u1, u2, u3]
         #Builds sample wordles data
         for wordle in wordles:
             try:
@@ -129,4 +129,3 @@ def initWordles():
                 '''fails with bad or duplicate data'''
                 db.session.remove()
                 print(f"Records exist, duplicate data, or error: {wordle.name}")
-"""
