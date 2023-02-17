@@ -132,11 +132,11 @@ def initPisses():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = Piss(name='Thomas Edison', level='100', time='00:03:01', pin='aspoi')
-    u2 = Piss(name='Nicholas Tesla', level='200', time='00:10:13', pin='brian')
-    u3 = Piss(name='Alexander Graham Bell', level='123', time='00:07:20', pin='23451')
-    u4 = Piss(name='Eli Whitney', level='432', time='00:06:09', pin='who')
-    u5 = Piss(name='John Mortensen', level='340', time='10:16:21', pin='apcs')
+    u1 = Piss(name='Thomas Edison', level='100', time='181', pin='aspoi')
+    u2 = Piss(name='Nicholas Tesla', level='200', time='613', pin='brian')
+    u3 = Piss(name='Alexander Graham Bell', level='123', time='440', pin='23451')
+    u4 = Piss(name='Eli Whitney', level='432', time='369', pin='who')
+    u5 = Piss(name='John Mortensen', level='340', time='36981', pin='apcs')
 
     pisses = [u1, u2, u3, u4, u5]
 
