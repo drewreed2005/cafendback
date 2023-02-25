@@ -21,15 +21,15 @@ class Wordle(db.Model):
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=False, nullable=False)
-    _pin = db.Column(db.String(255), unique=False, nullable=False)
     #_uid = db.Column(db.String(255), unique=True, nullable=False)
     _score = db.Column(db.String(255), unique=False, nullable=False)
+    _pin = db.Column(db.String(255), unique=False, nullable=False)
 
     # constructor of a User object, initializes the instance variables within object (self) 
     def __init__(self, name, score, pin):
         self._name = name
-        self._pin = pin
         self._score = score
+        self._pin = pin
     
     #here's the name getter
     @property
@@ -41,6 +41,16 @@ class Wordle(db.Model):
     def name(self, name):
         self._name = name
     
+    #here's the score getter
+    @property
+    def score(self):
+        return self._score
+    
+    #here's the email setter
+    @score.setter
+    def score(self, score):
+        self._score = score
+    
     #here's the pin getter
     @property
     def pin(self):
@@ -50,15 +60,6 @@ class Wordle(db.Model):
     def pin(self, pin):
         self._pin = pin
     
-    #here's the score getter
-    @property
-    def score(self):
-        return self._score
-    
-    @score.setter
-    def score(self, score):
-        self._score = score
-
     # output content using str(object) in human readable form, uses getter
     # output content using json dumps, this is ready for API response
     def __str__(self):
@@ -82,20 +83,20 @@ class Wordle(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "pin": self.pin,
-            "score": self.score
+            "score": self.score,
+            "pin": self.pin
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, name="", pin="", score=""):
+    def update(self, name="", score="", pin=""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
-        if len(pin) > 0:
-            self.pin = score
         if len(score) > 0:
             self.score = score
+        if len(pin) > 0:
+            self.pin = pin
         db.session.commit()
         return self
 
@@ -112,14 +113,16 @@ class Wordle(db.Model):
 
 # Builds working data for testing
 def initWordles():
+    with app.app_context():
         """Create database and tables"""
+        db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
-        u2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
-        u3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
+        e1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
+        e2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
+        e3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
         
-        wordles = [u1, u2, u3]
+        wordles = [e1, e2, e3]
         #Builds sample wordles data
         for wordle in wordles:
             try:

@@ -28,14 +28,13 @@ class WordleAPI:
                 return {'message': f'Pin is missing, or is less than 2 characters'}, 210
 
             ''' #1: Key code block, setup USER OBJECT '''
-            wo = Wordle(name=name, 
-                      score=score)
-            if pin is not None:
-                wo.set_pin(pin)
+            eo = Wordle(name=name, 
+                      score=score,
+                      pin=pin)
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
-            wordle = wo.create()
+            wordle = eo.create()
             # success returns json of user
             if wordle:
                 return jsonify(wordle.read())
