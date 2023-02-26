@@ -60,7 +60,24 @@ class EventAPI:
             events = Event.query.all()    # read/extract all users from database
             json_ready = [event.read() for event in events]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+    
+    class _Delete(Resource):
+        def delete(self, id):
+            # retrieve id as "wordleID"
+            eventID = Event.read(id=id)
+            if not eventID:
+                return {'message': f'Event with id "{id}" not found'}, 404
+            
+            # delete
+            result = request.delete(eventID)
+
+            # success return msg
+            if result:
+                return {'message': f'Successfully deleted event with id "{id}"'}, 200
+            # error return msg
+            return {'message': f'Error deleting event with id "{id}"'}, 500
 
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
+    api.add_resource(_Delete, '/delete')
