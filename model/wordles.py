@@ -46,7 +46,7 @@ class Wordle(db.Model):
     def score(self):
         return self._score
     
-    #here's the email setter
+    # score setter
     @score.setter
     def score(self, score):
         self._score = score
@@ -56,6 +56,7 @@ class Wordle(db.Model):
     def pin(self):
         return self._pin
     
+    # pin setter
     @pin.setter
     def pin(self, pin):
         self._pin = pin
@@ -117,12 +118,12 @@ def initWordles():
         """Create database and tables"""
         db.init_app(app)
         db.create_all()
-        """Tester data for table"""
-        e1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
-        e2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
-        e3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
+        """Tester data for table
+        w1 = Wordle(name="Thomas Edison", score=12, pin="qwerty123")
+        w2 = Wordle(name="John Mortensen", score=15, pin="codec0decod3bro")
+        w3 = Wordle(name="Karl Giant", score=10, pin="i_am-the-f4th3r")
         
-        wordles = [e1, e2, e3]
+        wordles = [w1, w2, w3]
         #Builds sample wordles data
         for wordle in wordles:
             try:
@@ -131,3 +132,4 @@ def initWordles():
                 '''fails with bad or duplicate data'''
                 db.session.remove()
                 print(f"Records exist, duplicate data, or error: {wordle.name}")
+        """
