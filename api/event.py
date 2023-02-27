@@ -3,7 +3,7 @@ from flask_restful import Api, Resource # used for REST API building
 from datetime import *
 from flask_cors import CORS
 
-from model.events import Event
+from model.events import Event, deleteID
 
 event_api = Blueprint('event_api', __name__,
                    url_prefix='/api/events')
@@ -60,7 +60,19 @@ class EventAPI:
             events = Event.query.all()    # read/extract all users from database
             json_ready = [event.read() for event in events]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+    
+    class _Delete(Resource):
+        def delete(self):
+            body = request.get_json()
+            event_id = body.get('id')
+           
+            status = deleteID(event_id)
+            if status:
+                return {'message': f'Successfully deleted event with id {event_id} '}
+            else:
+                return {'message': f'Event with id {event_id} not found'}, 240
 
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
+    api.add_resource(_Delete, '/delete')

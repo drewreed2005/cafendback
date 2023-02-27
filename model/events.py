@@ -217,3 +217,16 @@ def initEvents():
                 db.session.remove()
                 print(f"Records exist, duplicate data, or error: {event.event_name}")
         """
+
+def deleteID(event_id):                
+    event = Event.query.get(event_id)
+
+    #user = Wordle.query.filter_by(name=name).first()
+    if event != None:
+        print("Query 1:", event)
+        db.session.delete(event)
+        db.session.commit() 
+        return True
+    else:
+        print("event "+str(event_id)+" not found")
+        return False
