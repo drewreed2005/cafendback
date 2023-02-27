@@ -3,6 +3,8 @@ from flask_restful import Api, Resource # used for REST API building
 from datetime import *
 
 from model.wordles import Wordle
+from model.wordles import deleteID
+
 
 wordle_api = Blueprint('wordle_api', __name__,
                    url_prefix='/api/wordles')
@@ -52,20 +54,15 @@ class WordleAPI:
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
     
     class _Delete(Resource):
-        def delete(self, id):
-            # retrieve id as "wordleID"
-            wordleID = Wordle.read(id=id)
-            if not wordleID:
-                return {'message': f'Wordle with id "{id}" not found'}, 404
-            
-            # delete
-            result = request.delete(wordleID)
-
-            # success return msg
-            if result:
-                return {'message': f'Successfully deleted Wordle with id "{id}"'}, 200
-            # error return msg
-            return {'message': f'Error deleting Wordle with id "{id}"'}, 500
+        def delete(self):
+            body = request.get_json()
+            user_id = body.get('id')
+           
+            status = deleteID(user_id)
+            if status:
+                return {'message': f'Successfully deleted user with id {user_id} '}
+            else:
+                return {'message': f'User with id {user_id} not found'}, 240
 
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')

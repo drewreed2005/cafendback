@@ -132,3 +132,16 @@ def initWordles():
                 db.session.remove()
                 print(f"Records exist, duplicate data, or error: {wordle.name}")
         """
+
+def deleteID(user_id):                
+    user = Wordle.query.get(user_id)
+
+    #user = Wordle.query.filter_by(name=name).first()
+    if user != None:
+        print("Query 1:", user)
+        db.session.delete(user)
+        db.session.commit() 
+        return True
+    else:
+        print("user "+str(user_id)+" not found")
+        return False
