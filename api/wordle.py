@@ -57,8 +57,10 @@ class WordleAPI:
         def delete(self):
             body = request.get_json()
             user_id = body.get('id')
+            user_pin = body.get('pin')
            
-            status = deleteID(user_id)
+            #status = deleteID(user_id)
+            status = deleteID(user_id, user_pin)
             if status:
                 return {'message': f'Successfully deleted user with id {user_id} '}
             else:

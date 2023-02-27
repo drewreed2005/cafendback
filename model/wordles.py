@@ -145,3 +145,21 @@ def deleteID(user_id):
     else:
         print("user "+str(user_id)+" not found")
         return False
+
+
+def deleteID(user_id, user_pin):                
+    user = Wordle.query.get(user_id)
+
+    #user = Wordle.query.filter_by(name=name).first()
+    if user != None:
+        print("Query 1:", user)
+        real_user_pin = user.pin
+        print(real_user_pin)
+        if user_pin == real_user_pin:
+            db.session.delete(user)
+            db.session.commit() 
+            return True
+        else:
+            print("User "+str(user_id)+" not found, or pin not correct.")
+            return False
+    
