@@ -219,14 +219,14 @@ def initEvents():
         """
 
 def deleteID(event_id):                
-    event = Event.query.get(event_id)
+    event = Event.query.get(event_id) #getting an event from the database based on ID
 
     #user = Wordle.query.filter_by(name=name).first()
     if event != None:
-        print("Query 1:", event)
-        db.session.delete(event)
-        db.session.commit() 
+        print("Query 1:", event) #prints the one query if it finds one
+        db.session.delete(event) #deletes the event with the db.session innate function
+        db.session.commit() #commits the change
         return True
     else:
-        print("event "+str(event_id)+" not found")
+        print("event "+str(event_id)+" not found") #if the event isn't found, the display is provided
         return False

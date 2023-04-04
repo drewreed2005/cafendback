@@ -63,10 +63,10 @@ class EventAPI:
     
     class _Delete(Resource):
         def delete(self):
-            body = request.get_json()
-            event_id = body.get('id')
+            body = request.get_json() #getting the database data for a given event
+            event_id = body.get('id') #isolating the ID of the given entry
            
-            status = deleteID(event_id)
+            status = deleteID(event_id) #uses the deleteID function from the model
             if status:
                 return {'message': f'Successfully deleted event with id {event_id} '}
             else:
