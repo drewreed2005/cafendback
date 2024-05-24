@@ -24,6 +24,7 @@ This flask backend repository frequently references this flask repository [found
 ## Code Student Resources
 
 - Here's a link to our early [Scrum Board](https://github.com/drewreed2005/cafegato/issues/1).
+- This is our primary [Scrum Board](https://github.com/users/drewreed2005/projects/1) used throughout the remainder of the proejct.
 - Here is our [review ticket](https://github.com/drewreed2005/cafegato/issues/6) from the final project review. It includes separate links to individual contribution details.
 
 ## Contributors
